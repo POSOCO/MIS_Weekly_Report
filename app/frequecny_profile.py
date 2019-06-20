@@ -5,14 +5,22 @@ import pandas as pd
 wb =load_workbook(filename = '../Files/Frequency.xlsx')
 ws = wb.active
 
-frequency_col_range = ws['B']
-frequency_row_range = ws[2:81]
+
+frequency_cell = ws['B2:B8641']
 frequency_value = []
 
-for row in frequency_row_range:
-    for col in frequency_col_range:
-        print(col.value)
+for row in frequency_cell:
+    for col in row:
+        frequency_value.append(col.value)
 
-# df = pd.DataFrame(frequency_value)
 
-# print(max(frequency_value))
+print(max(frequency_value))
+
+print(min(frequency_value))
+
+
+def avg_frequency(lst):
+    return (sum(lst)/len(lst))
+
+
+print(round(avg_frequency(frequency_value),2))
