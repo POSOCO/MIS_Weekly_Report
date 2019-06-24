@@ -1,21 +1,11 @@
 from openpyxl import Workbook
 from openpyxl import load_workbook
 import pandas as pd 
+import glob
+from datetime import datetime
 
 def avg_frequency(lst):
     return (sum(lst)/len(lst))
-
-
-wb =load_workbook(filename = '../Files/Frequency.xlsx')
-ws = wb.active
-
-
-frequency_cell = ws['B2:B8641']
-frequency_value = []
-
-for row in frequency_cell:
-    for col in row:
-        frequency_value.append(col.value)
 
 def band_duration_info():
     below_band = 0
@@ -47,8 +37,44 @@ def band_duration_info():
         'above_band':round(above_band/percent_value,2),
         'outside_band':outside_band,
         'hours_outside_band':hours_outside_band,
-        'fdi': round(hours_outside_band/24,2)
+        'fdi': round(hours_outside_band/24,2),
+        'date':date,
+        
     }
     return band_duration_info
 
-print(band_duration_info())
+def weekly_fdi():
+    totalHoursOutOfIEGC = 0
+    for eachFrequencyProfile in frequency_profile_data:
+          totalHoursOutOfIEGC += eachFrequencyProfile['hours_outside_band']
+    return round(totalHoursOutOfIEGC/(168) , 2)
+
+files = glob.glob("../Files/*.xlsx")
+frequency_profile_data = []
+
+for file in files:
+    wb = load_workbook(filename = file)
+    ws = wb.active
+    frequency_cell = ws['B2:B8641']
+    frequency_value = []
+    dateRow = ws["A1"]
+    date = datetime.strftime(dateRow.value,'%d')
+    
+    for row in frequency_cell:
+        for col in row:
+             frequency_value.append(col.value)
+
+    frequency_profile_data.append(band_duration_info())
+
+
+
+
+#print(frequency_profile_data)
+print(weekly_fdi())
+
+
+
+
+
+
+
