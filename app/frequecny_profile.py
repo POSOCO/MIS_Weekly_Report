@@ -4,6 +4,10 @@ import pandas as pd
 import glob
 from datetime import datetime
 
+f = open('../Logs/Logger.txt',"a+")
+f.write('The code is run at Main Script '+datetime.now().strftime('%Y-%m-%d %H:%M:%S')+ '\n')
+
+
 def avg_frequency(lst):
     return (sum(lst)/len(lst))
 
@@ -63,14 +67,14 @@ for file in files:
     for row in frequency_cell:
         for col in row:
              frequency_value.append(col.value)
+             
 
     frequency_profile_data.append(band_duration_info())
 
 
 
 
-#print(frequency_profile_data)
-print(weekly_fdi())
+
 
 
 
