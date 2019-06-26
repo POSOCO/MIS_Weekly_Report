@@ -10,4 +10,8 @@ blist = {'c':11}
 for each in alist,blist:
     print(each)
 
+i=1
+if i/2 == 0:
+    print(i)
+    i+=1
 
