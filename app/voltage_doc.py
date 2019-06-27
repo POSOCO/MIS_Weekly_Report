@@ -84,11 +84,12 @@ dateList = vol_profile.dateList
                 table1.cell(row,col).text = str(vol_profile.vol_profile_data[eachStation][date]['Max'])
                 table1.cell(row,col).paragraphs[0].alignment = 1 
 '''
-for row,date in zip(range(2,9),dateList):
+'''for row,date in zip(range(2,9),dateList):
         table1.cell(row,0).text = str(date) 
         table2.cell(row,0).text = str(date) 
         table3.cell(row,0).text = str(date) 
         table4.cell(row,0).text = str(date) 
+
         station = 0
         for col in range(1,19):
             if col%2 == 0:
@@ -108,6 +109,19 @@ for row,date in zip(range(2,9),dateList):
                 table1.cell(row,col).paragraphs[0].alignment = 1 
                 table2.cell(row,col).paragraphs[0].alignment = 1 
                 table3.cell(row,col).paragraphs[0].alignment = 1
+'''
+for row,date in zip(range(2,9),dateList):
+    station = 0
+    for col in range(1,16):
+        if col%2 == 0:
+            print('We are in if loop ,col value is '+str(col) )
+            table4.cell(row,col).text = str(vol_profile.vol_profile_data[table4Stations[station]][date]['Min'])
+            table4.cell(row,col).paragraphs[0].alignment = 1   
+            station += 1
+        else:
+            print('We are in else loop ,col value is '+str(col) )
+            table4.cell(row,col).text = str(vol_profile.vol_profile_data[table4Stations[station]][date]['Max'])
+            table4.cell(row,col).paragraphs[0].alignment = 1 
             
 '''for eachStation in table2Stations:
     for row,date in zip(range(2,9),dateList):
