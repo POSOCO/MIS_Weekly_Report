@@ -24,7 +24,7 @@ vol_profile_data_765KV = []
 vol_profile_data = {}
 dateList = []
 
-for eachStation in vol_station_list:
+for eachStation in vol_station_list
     vol_profile_data[eachStation] = {}
 
 for file in files:
